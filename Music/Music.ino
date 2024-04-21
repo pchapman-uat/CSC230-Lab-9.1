@@ -24,6 +24,13 @@ M5StickCPlus through the web page 并可通过网页向 M5StickCPlus 发送请�
 const char* SSID = "PC_M5Stick";
 WiFiServer server(80);
 
+
+// PC Start
+const int servo_pin = 26;
+int freq            = 50;
+int ledChannel      = 0;
+int resolution      = 10;
+// PC End
 void setup() {
     M5.begin();
     M5.lcd.setRotation(3);
@@ -42,7 +49,10 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     // Turn the led off
     digitalWrite(LED_BUILTIN, HIGH);
-    // PC Stop
+
+    ledcSetup(ledChannel, freq, resolution);
+    ledcAttachPin(servo_pin, ledChannel);
+    ledcWrite(ledChannel, 256);  // 0°
 }
 
 void loop() {
@@ -133,4 +143,20 @@ void playMusic(){
     //   a     440 Hz
     //   b     494 Hz
     //   C     523 Hz
+
+    int i, duration;
+    int notes[] = {659,659,0,659,0,523,659,0,784,0,392};
+    int beats[] = {1,1,1,1,1,1,1,1,2,2,2};
+    int songLength = sizeof(notes);
+    int tempo = 100;
+
+  
+  for (i = 0; i < songLength; i++) // step through the song arrays
+  {
+    duration = beats[i] * tempo;  // length of note/rest in ms
+    ledcWriteTone(ledChannel, notes[i]);
+    delay(duration);            // wait for tone to finish
+
+    delay(tempo/10);              // brief pause between notes
+  }
 }
