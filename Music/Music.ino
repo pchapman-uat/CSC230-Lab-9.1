@@ -119,3 +119,18 @@ void loop() {
         client.stop();  // close the connection.  关闭连接
     }
 }
+
+void playMusic(){
+    // Notes:
+    // EE E CE G g
+
+    // Key: 
+    //   c     262 Hz
+    //   d     294 Hz
+    //   e     330 Hz
+    //   f     349 Hz
+    //   g     392 Hz
+    //   a     440 Hz
+    //   b     494 Hz
+    //   C     523 Hz
+}
