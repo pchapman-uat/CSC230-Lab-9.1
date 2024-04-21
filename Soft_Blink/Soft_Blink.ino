@@ -112,11 +112,11 @@ void loop() {
                 // Check to see if the client request was "GET /H" or "GET /L":
                 // 检查客户端请求是“GET /High”还是“GET /Low”:
                 if (currentLine.endsWith("GET /High")) {
-                    M5.Lcd.print("ON\n");
+                    M5.Lcd.print("OFF\n");
                     // PC Change Bellow
                     digitalWrite(LED_BUILTIN, HIGH);
                 } else if (currentLine.endsWith("GET /Low")) {
-                    M5.Lcd.print("OFF\n");
+                    M5.Lcd.print("ON\n");
                     // PC Change Bellow
                     digitalWrite(LED_BUILTIN, LOW);
                 }
