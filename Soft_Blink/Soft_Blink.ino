@@ -19,6 +19,8 @@ M5StickCPlus through the web page 并可通过网页向 M5StickCPlus 发送请�
 #include <WiFiClient.h>
 #include <WiFiAP.h>
 
+#define LED_BUILTIN 10
+
 const char* SSID = "PC_M5Stic";
 WiFiServer server(80);
 
@@ -35,6 +37,12 @@ void setup() {
     M5.lcd.println(myIP);
     server.begin();  // Start the established Internet of Things network server.
                      // 启动建立的物联网网络服务器
+    // PC Start
+    // Set the LED pin as an output
+    pinMode(LED_BUILTIN, OUTPUT);
+    // Turn the led off
+    digitalWrite(LED_BUILTIN, HIGH);
+    // PC Stop
 }
 
 void loop() {
@@ -80,10 +88,10 @@ void loop() {
                         // the corresponding connection, which can be replaced.
                         //  /High和/Low 为点击对应连接时接收到的数据,可更换
                         client.print(
-                            "Click <a href=\"/High\">here</a> to turn ON the "
+                            "Click <a href=\"/Low\">here</a> to turn ON the "
                             "LED.<br>");
                         client.print(
-                            "Click <a href=\"/Low\">here</a> to turn OFF the "
+                            "Click <a href=\"/High\">here</a> to turn OFF the "
                             "LED.<br>");
 
                         // The HTTP response ends with another blank line:
@@ -107,8 +115,12 @@ void loop() {
                 // 检查客户端请求是“GET /High”还是“GET /Low”:
                 if (currentLine.endsWith("GET /High")) {
                     M5.Lcd.print("ON\n");
+                    // PC Change Bellow
+                    digitalWrite(LED_BUILTIN, HIGH);
                 } else if (currentLine.endsWith("GET /Low")) {
                     M5.Lcd.print("OFF\n");
+                    // PC Change Bellow
+                    digitalWrite(LED_BUILTIN, LOW);
                 }
             }
         }
