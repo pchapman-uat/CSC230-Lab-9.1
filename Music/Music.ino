@@ -52,7 +52,7 @@ void setup() {
 
     ledcSetup(ledChannel, freq, resolution);
     ledcAttachPin(servo_pin, ledChannel);
-    ledcWrite(ledChannel, 256);  // 0°
+    ledcWrite(ledChannel, 0);  // 0°
 }
 
 void loop() {
@@ -98,7 +98,7 @@ void loop() {
                         // the corresponding connection, which can be replaced.
                         //  /High和/Low 为点击对应连接时接收到的数据,可更换
                         client.print(
-                            "<button onclick=\"window.location.href='/Play'\">Turn LED ON</button>");
+                            "<button onclick=\"window.location.href='/Play'\">Play Music</button>");
 
                         // The HTTP response ends with another blank line:
                         // HTTP响应以空行结束:
@@ -122,7 +122,7 @@ void loop() {
                 if (currentLine.endsWith("GET /Play")) {
                     M5.Lcd.print("Playing Music...\n");
                     // PC Change Bellow
-                    // TODO: Play Music Function
+                    playMusic();
                 }
             }
         }
