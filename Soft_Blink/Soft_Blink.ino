@@ -88,11 +88,9 @@ void loop() {
                         // the corresponding connection, which can be replaced.
                         //  /High和/Low 为点击对应连接时接收到的数据,可更换
                         client.print(
-                            "Click <a href=\"/Low\">here</a> to turn ON the "
-                            "LED.<br>");
+                            "<button onclick=\"window.location.href='/Low'\">Turn LED ON</button>");
                         client.print(
-                            "Click <a href=\"/High\">here</a> to turn OFF the "
-                            "LED.<br>");
+                             "<button onclick=\"window.location.href='/High'\">Turn LED OFF</button>");
 
                         // The HTTP response ends with another blank line:
                         // HTTP响应以空行结束:
