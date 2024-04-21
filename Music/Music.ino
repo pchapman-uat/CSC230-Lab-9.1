@@ -21,7 +21,7 @@ M5StickCPlus through the web page 并可通过网页向 M5StickCPlus 发送请�
 
 #define LED_BUILTIN 10
 
-const char* SSID = "PC_M5Stic";
+const char* SSID = "PC_M5Stick";
 WiFiServer server(80);
 
 void setup() {
@@ -88,9 +88,7 @@ void loop() {
                         // the corresponding connection, which can be replaced.
                         //  /High和/Low 为点击对应连接时接收到的数据,可更换
                         client.print(
-                            "<button onclick=\"window.location.href='/Low'\">Turn LED ON</button>");
-                        client.print(
-                             "<button onclick=\"window.location.href='/High'\">Turn LED OFF</button>");
+                            "<button onclick=\"window.location.href='/Play'\">Turn LED ON</button>");
 
                         // The HTTP response ends with another blank line:
                         // HTTP响应以空行结束:
@@ -111,14 +109,10 @@ void loop() {
 
                 // Check to see if the client request was "GET /H" or "GET /L":
                 // 检查客户端请求是“GET /High”还是“GET /Low”:
-                if (currentLine.endsWith("GET /High")) {
-                    M5.Lcd.print("ON\n");
+                if (currentLine.endsWith("GET /Play")) {
+                    M5.Lcd.print("Playing Music...\n");
                     // PC Change Bellow
-                    digitalWrite(LED_BUILTIN, HIGH);
-                } else if (currentLine.endsWith("GET /Low")) {
-                    M5.Lcd.print("OFF\n");
-                    // PC Change Bellow
-                    digitalWrite(LED_BUILTIN, LOW);
+                    // TODO: Play Music Function
                 }
             }
         }
